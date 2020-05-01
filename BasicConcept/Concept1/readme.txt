@@ -1,5 +1,5 @@
 https://youtu.be/9uKdes4tX7c / 스프링부트 프로젝트시작(세팅) (20200421)
-https://youtu.be/C-06XevGbtQ / porn.xml에서 쉽게 dependency붙이기(lombok) devtool추가 (20200421)
+https://youtu.be/C-06XevGbtQ / porn.xml에서 쉽게 dependency붙이기(lombok) devtool추가 (20200421), cf) @RestController, devtool추가(14분),  springboot의 정적페이지만들기(29분)
 
 
 application.properties - 유일한 환경설정파일
@@ -8,7 +8,6 @@ templates 폴더 - html을 templates에 두면 타임리프가 된다(일반 htm
 cf) 
 springboot는 jsp를 쓰지 않는다.
 타임리프(th)가 jsp의 역할을 함
-
 
 
 @RestController는 string을 리턴하기 때문에 view가 따로 필요없다. 단순 문자열은 아니고 json데이터
