@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>example.com 회원명단</title>
+    <style type="text/css">
+    	body {
+    		margin:0px;
+    		padding:0px;
+    	}
+        h1 { text-align: center;} 
+        table { 
+            width:500px; 
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            border : 1px solid white;
+        }
+        th, td {
+            border :1px solid blue;
+        }
+        th{
+            background-color: navy;
+            color : white;
+            height:40px;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+	<div>
+		<a th:href="@{/}"><img th:src="@{images/spring-boot.png}" /></a>
+	</div>
+    <h1>회원명단</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+                <th>거주지</th>
+            </tr>
+        </thead>
+        <tbody>
+			<tr th:each="member:${members}">
+				<td><a th:href="@{/member/{userid}(userid=${member.userid})}"
+				             th:text="${member.userid}"></a></td>
+				<td th:text="${member.name}"></td>
+				<td th:text="${member.age}"></td>
+				<td th:if="${member.gender eq '1'}" th:text="남성"></td>
+				<td th:if="${member.gender eq '0'}" th:text="여성"></td>
+				<td th:text="${member.city}"></td>
+			</tr>
+        </tbody>
+    </table>
+</body>
+</html>

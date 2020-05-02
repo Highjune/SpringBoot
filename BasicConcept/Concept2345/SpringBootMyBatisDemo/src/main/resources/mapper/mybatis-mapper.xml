@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vo.MemberVO">
+
+	<parameterMap type="memberVO" id="parameterInsertMap">
+		<parameter property="userid" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="passwd" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="name" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="age" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="gender" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="city" javaType="String" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	<insert id="insert" parameterType="memberVO" 
+		parameterMap="parameterInsertMap" statementType="CALLABLE">
+		{ call member_insert_sp(?,?,?,?,?,?) }
+	</insert>
+	
+	<resultMap type="memberVO" id="memberVOResultMap">
+		<result property="userid" column="userid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="age" column="age" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="gender" column="gender" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="city" column="city" javaType="java.lang.String" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<parameterMap type="hashmap" id="parameterSelectAllMap">
+		<parameter property="results" javaType="ResultSet" 
+			jdbcType="CURSOR" mode="OUT" resultMap="memberVOResultMap"/>
+	</parameterMap>
+	<select id="selectAll" parameterMap="parameterSelectAllMap" statementType="CALLABLE">
+		{  call member_select_all_sp(?) }
+	</select>
+	
+	
+	<parameterMap type="hashmap" id="parameterSelectMap">
+		<parameter property="userid" javaType="java.lang.String" 
+			mode="IN" jdbcType="VARCHAR" />
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR"
+			mode="OUT" resultMap="memberVOResultMap"/>
+	</parameterMap>
+	<select id="select" parameterMap="parameterSelectMap" statementType="CALLABLE">
+		{ call member_select_sp(?, ?) }
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.String" statementType="CALLABLE">
+		{ call member_delete_sp(#{userid}) }		
+	</delete>
+	
+	
+	<parameterMap type="memberVO" id="parameterUpdateMap">
+		<parameter property="age" javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<parameter property="gender" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<parameter property="city" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<parameter property="userid" javaType="java.lang.String" jdbcType="VARCHAR"/>
+	</parameterMap>
+	<update id="update" parameterType="memberVO" 
+		parameterMap="parameterUpdateMap" statementType="CALLABLE">
+		{ call member_update_sp(?,?,?,?) }	
+	</update>
+
+</mapper>
+
+
+
+

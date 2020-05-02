@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원정보 상세보기</title>
+</head>
+<body>
+	<div><a href="#" th:href="@{/}"><img th:src="@{/images/spring-boot.png}" /></a></div>
+	<div th:object="${member}">
+	    <h1><span th:text="*{name}"></span>(<span th:text="*{userid}"></span>)님! 회원 정보</h1>
+	    <ul>
+	        <li>아이디 : <span th:text="*{userid}"></span></li>
+	        <li>이름 : <span th:text="*{name}"></span></li>
+	        <li>나이 : <span th:text="*{age}"></span></li>
+	        <li>성별 : <span th:if="*{gender eq '1'}" th:text="남성"></span>
+	        				<span th:if="*{gender eq '0'}" th:text="여성"></span>
+	        </li>
+	        <li>거주지 : <span th:text="*{city}"></span></li>
+	    </ul>
+    </div>
+    <div>
+    	<a href="#" th:href="@{/list}">목록으로</a>&nbsp;&nbsp;
+    	<a th:href="@{/member/update/{userid}(userid=${member.userid})}">정보수정하기</a>&nbsp;&nbsp;
+    	<a th:href="@{/delete/{userid}(userid=${member.userid})}">탈퇴하기</a>
+    </div>
+</body>
+</html>

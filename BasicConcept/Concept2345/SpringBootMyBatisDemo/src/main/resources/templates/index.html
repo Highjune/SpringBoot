@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome example.com</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" />
+    <script th:src="@{js/jquery-3.5.0.min.js}"></script>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Welcome to www.example.com</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo accusantium, aspernatur quos porro commodi perspiciatis, assumenda consequuntur eius inventore eaque omnis, magni natus corrupti doloremque? Quia aliquid excepturi tempora praesentium modi necessitatibus sequi quisquam dolorem nihil deserunt magnam, distinctio sunt aspernatur nisi. Id odio quaerat amet quidem adipisci totam ad.</p>
+        <p>
+        	<a class="btn btn-primary btn-lg" th:href="@{register}" role="button">회원가입</a>&nbsp;&nbsp;
+        	<a class="btn btn-success btn-lg" th:href="@{list}" role="button">전체회원명단</a> 
+        </p>
+	</div>
+	<div><img th:src="@{/images/spring-boot.png}" /></div>
+</body>
+</html>

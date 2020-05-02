@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script>
+        $(function () {
+            var flag = 0;
+            $("#userid").bind("change", function () {
+                if ($("#userid").val()) {
+                    $("#useriddiv").attr("class", "form-group has-success has-feedback");
+                    $("#useridicon").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+                    $("#useridsr").text("(success)");
+                    flag++;
+                }
+            });
+            $("#passwd").bind("change", function () {
+                if ($("#passwd").val()) {
+                    $("#passwddiv").attr("class", "form-group has-success has-feedback");
+                    $("#passwdicon").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+                    $("#passwdsr").text("(success)");
+                    flag++;
+                }
+            });
+            $("#name").bind("change", function () {
+                if ($("#name").val()) {
+                    $("#namediv").attr("class", "form-group has-success has-feedback");
+                    $("#nameicon").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+                    $("#namesr").text("(success)");
+                    flag++;
+                }
+            });
+            $("#age").bind("keyup", function () {
+                if ($("#age").val() >= 20 && $("#age").val() <= 65) {
+                    $("#agediv").attr("class", "form-group has-success has-feedback");
+                    $("#ageicon").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+                    $("#agesr").text("(success)");
+                    flag++;
+                }
+            });
+            $(":radio").bind("click", function () {
+                $("#genderdiv").attr("class", "form-group has-success has-feedback");
+                flag++;
+            });
+            $("#city").bind("change", function () {
+                if ($("#city").val()) {
+                    $("#citydiv").attr("class", "form-group has-success has-feedback");
+                    flag++;
+                    if (flag == 6) {
+                        $('button').removeAttr("disabled");
+                    }
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="h1 text-center">회원가입</h1>
+        </div>
+        <div class="row">
+            <form class="form-horizontal" th:action="@{/register}" method="post">
+                <div id="useriddiv" class="form-group has-error has-feedback">
+                    <label for="userid" class="col-sm-3 control-label">User ID</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon
+    glyphicon-trash"></span></span>
+                            <input type="text" name="userid" id="userid" class="form-control" 
+                            placeholder="Enter your ID">
+                        </div>
+                        <span id="useridicon" class="glyphicon glyphicon-remove form-control-feedback"
+                            aria-hidden="true"></span>
+                        <span id="useridsr" class="sr-only">(error)</span>
+                    </div>
+                </div>
+                <div id="passwddiv" class="form-group has-error has-feedback">
+                    <label for="passwd" class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon 
+                                glyphicon-lock"></span></span>
+                            <input type="password" name="passwd" id="passwd" class="form-control" 
+                            placeholder="Enter your password">
+                        </div>
+                        <span id="passwdicon" class="glyphicon glyphicon-remove form-control-feedback"
+                            aria-hidden="true"></span>
+                        <span id="passwdsr" class="sr-only">(error)</span>
+                    </div>
+                </div>
+                <div id="namediv" class="form-group has-error has-feedback">
+                    <label for="name" class="col-sm-3 control-label">Name</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon
+    glyphicon-user"></span></span>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name">
+                        </div>
+                        <span id="nameicon" class="glyphicon glyphicon-remove form-control-feedback"
+                            aria-hidden="true"></span>
+                        <span id="namesr" class="sr-only">(error)</span>
+                    </div>
+                </div>
+                <div id="agediv" class="form-group has-error has-feedback">
+                    <label for="age" class="col-sm-3 control-label">Age</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon
+    glyphicon-music"></span></span>
+                            <input type="number" name="age" id="age" class="form-control" placeholder="Enter your age">
+                        </div>
+                        <span id="ageicon" class="glyphicon glyphicon-remove form-control-feedback"
+                            aria-hidden="true"></span>
+                        <span id="agesr" class="sr-only">(error)</span>
+                    </div>
+                </div>
+                <div id="genderdiv" class="form-group has-error has-feedback">
+                    <label class="col-sm-3 control-label">Gender</label>
+                    <div class="col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" value="1">Male
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" value="0">Female
+                        </label>
+                    </div>
+                </div>
+                <div id="citydiv" class="form-group has-error has-feedback">
+                    <label for="city" class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-6">
+                        <select name="city" id="city" class="form-control">
+                            <option value="">--선택--</option>
+                            <option value="서울">서울</option>
+                            <option value="부산">부산</option>
+                            <option value="대전">대전</option>
+                            <option value="광주">광주</option>
+                            <option value="대구">대구</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <button class="col-sm-4 btn btn-primary" disabled>Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
