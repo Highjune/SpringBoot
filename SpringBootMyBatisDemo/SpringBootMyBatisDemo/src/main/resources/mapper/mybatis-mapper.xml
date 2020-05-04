@@ -24,7 +24,6 @@
 		<result property="gender" column="gender" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="city" column="city" javaType="java.lang.String" jdbcType="VARCHAR"/>
 	</resultMap>
-	
 	<parameterMap type="hashmap" id="parameterSelectAllMap">
 		<parameter property="results" javaType="ResultSet" 
 			jdbcType="CURSOR" mode="OUT" resultMap="memberVOResultMap"/>
@@ -44,6 +43,7 @@
 		{ call member_select_sp(?, ?) }
 	</select>
 	
+	
 	<delete id="delete" parameterType="java.lang.String" statementType="CALLABLE">
 		{ call member_delete_sp(#{userid}) }		
 	</delete>
@@ -61,7 +61,6 @@
 	</update>
 
 </mapper>
-
 
 
 

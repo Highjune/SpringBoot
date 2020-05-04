@@ -11,15 +11,15 @@ import com.example.vo.MemberVO;
 @Repository("memberDao")
 public class MemberDaoImpl implements MemberDao {
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession sqlSession; //바인딩
 	
 	@Override
 	public void create(MemberVO member) {
-		this.sqlSession.insert("insert", member);
+		this.sqlSession.insert("insert", member);  //mapper
 	}
 
 	@Override
-	public void read(Map map) {
+	public void read(Map map) { 
 		this.sqlSession.selectOne("select", map);
 	}
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"> <!-- 타임리프 -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,10 @@
 	    <h1><span th:text="*{name}"></span>(<span th:text="*{userid}"></span>)님! 회원 정보</h1>
 	    <ul>
 	        <li>아이디 : <span th:text="*{userid}"></span></li>
-	        <li>이름 : <span th:text="*{name}"></span></li>
-	        <li>나이 : <span th:text="*{age}"></span></li>
-	        <li>성별 : <span th:if="*{gender eq '1'}" th:text="남성"></span>
-	        				<span th:if="*{gender eq '0'}" th:text="여성"></span>
+	        <li>이름    : <span th:text="*{name}"></span></li>
+	        <li>나이    : <span th:text="*{age}"></span></li>
+	        <li>성별    : <span th:if="*{gender eq '1'}" th:text="남성"></span>
+     		    		<span th:if="*{gender eq '0'}" th:text="여성"></span>
 	        </li>
 	        <li>거주지 : <span th:text="*{city}"></span></li>
 	    </ul>
@@ -26,3 +26,4 @@
     </div>
 </body>
 </html>
+

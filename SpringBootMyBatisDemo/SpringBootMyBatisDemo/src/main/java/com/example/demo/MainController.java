@@ -47,19 +47,19 @@ public class MainController {  //실제로 할 때는 게시판, 방명록 등 �
 		this.memberService.selectAllMembers(map);
 		List<MemberVO> list = (List<MemberVO>)map.get("results");
 		//list.forEach(member -> log.info("" + member));
-		model.addAttribute("members", list);
+		model.addAttribute("members", list); //model에 넣어야 templates을 찍을 때 그 내용(list)을 가져갈 수 있다. 타임리프시 th:objec="${member}"
 		return "list";   //templates/list.html
 	}
 	
-	@GetMapping("/member/{userid}")
+	@GetMapping("/member/{userid}")  //get으로 자신의 페이지 가는 것
 	public String display(@PathVariable String userid, Model model) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userid", userid);
-		this.memberService.selectMember(map);
-		List<MemberVO> list = (List<MemberVO>)map.get("result");
-		MemberVO member = list.get(0);
-		model.addAttribute("member", member);
-		//log.info("user = {}", member);
+		Map<String, Object> map = new HashMap<String, Object>(); //select니까 map으로 받아야 한다.
+		map.put("userid", userid); //map의 userid라는 key에 userid를 담음
+		this.memberService.selectMember(map); //뒤쪽으로 보냄(userid가 들어있음), 이 map에는 2개의 방이 들어있음 (userid:jimin), 그리고 다른 1개의 방은 비어있는 상태.
+		List<MemberVO> list = (List<MemberVO>)map.get("result"); //result라는 key로 받아옴
+		MemberVO member = list.get(0); //1명이니까
+		model.addAttribute("member", member); //key가 "member"이고 그 안에 memder를 담았다.
+		//log.info("user = {}", member); //내가 검색한 사람이 맞는지
 		return "display";   //templates/display.html
 	}
 	
@@ -72,20 +72,20 @@ public class MainController {  //실제로 할 때는 게시판, 방명록 등 �
 	@GetMapping("/member/update/{userid}")
 	public String update(@PathVariable String userid, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userid", userid);
-		this.memberService.selectMember(map);
-		List<MemberVO> list = (List<MemberVO>)map.get("result");
-		MemberVO member = list.get(0);
+		map.put("userid", userid); 
+		this.memberService.selectMember(map); //뒤쪽(일단 service)으로 보냄
+		List<MemberVO> list = (List<MemberVO>)map.get("result"); //가져온 바구니
+		MemberVO member = list.get(0); //1명의 멤버
 		model.addAttribute("member", member);
 		//log.info("수정할 UserID = " + userid);
 		return "update";   //templates/update.html
 	}
 	
-	 @RequestMapping(value = "/member", method=RequestMethod.POST) 
+	 @RequestMapping(value = "/member", method=RequestMethod.POST)  
 	 public String update(MemberVO member) {
 		 //log.info("수정할 멤버 = " + member);
 		 this.memberService.updateMember(member); 
-		 return  "redirect:/member/" + member.getUserid();
+		 return  "redirect:/member/" + member.getUserid(); // @GetMapping("/member/{userid}") 수정이 끝나면 자신의 페이지로 가는 것
 	 }
 }
 
