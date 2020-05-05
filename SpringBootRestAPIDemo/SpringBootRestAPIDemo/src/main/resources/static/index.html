@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example.com 회원명단</title>
+    <style type="text/css">
+    	body {
+    		margin:0px;
+    		padding:0px;
+    	}
+        h1 { text-align: center;} 
+        table { 
+            width:500px; 
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            border : 1px solid white;
+        }
+        th, td {
+            border :1px solid blue;
+        }
+        th{
+            background-color: navy;
+            color : white;
+            height:40px;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script>
+    	$(function(){
+    		$.ajax({
+    			url : "http://192.168.56.3:8080/SpringBootRestAPIDemo/members",
+    			type : "GET",
+    			dataType : "json",
+    			success : function(data){
+    				var datas = data.results;
+    				var str = "";
+    				for(var i = 0 ; i < datas.length ;i++){
+    					var gender = (datas[i].gender == '1') ? "남성" : "여성";
+    					str += "<tr><td>" + "<a href='display.html?userid=" + 
+    								datas[i].userid + "'>" + datas[i].userid + "</a></td>" +
+    							   "<td>" + datas[i].name + "</td>"+
+    							   "<td>" + datas[i].age + "</td>" + 
+    							   "<td>" + gender + "</td>" + 
+    							   "<td>" + datas[i].city + "</td></tr>";
+    				}
+    				$("#datas").html(str);
+    			},
+    			error :function(err){
+    				alert("error = " + err);
+    			}
+    		});
+    	});
+    </script>
+</head>
+<body>
+	<div>
+		<a href="/SpringBootRestAPIDemo/"><img src="images/spring-boot.png" /></a>
+	</div>
+    <h1>회원명단</h1>
+    <div style="text-align:center"><a href="register.html">Add Member</a></div>
+    <table>
+        <thead>
+            <tr>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>성별</th>
+                <th>거주지</th>
+            </tr>
+        </thead>
+        <tbody id="datas">
+			
+        </tbody>
+    </table>
+</body>
+</html>

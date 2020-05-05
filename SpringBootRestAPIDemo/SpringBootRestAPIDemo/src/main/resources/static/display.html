@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보 상세보기</title>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script>
+    	$(function(){
+    		var userid = location.search.split("=")[1];
+    		$.ajax({
+    			url : "http://192.168.56.3:8080/SpringBootRestAPIDemo/members/" + userid,
+    			type : "GET",
+    			dataType : "json",
+    			success : function(data){  //서버로부터 받은 데이터
+    				var user = data.result;
+    				$(".name").text(user.name);
+    				$(".userid").text(user.userid);
+    				$("#age").text(user.age);
+    				var gender = (user.gender == '1') ? "남성" : "여성";
+    				$("#gender").text(gender);
+    				$("#city").text(user.city);
+    			},
+    			error : function(err){
+    				alert("Error = " + err);
+    			}
+    		});
+    		$("#btnDelete").bind("click", function(){
+    			if(confirm("정말 탈퇴하시겠습니까?")){
+    				$.ajax({
+    					url : "http://192.168.56.3:8080/SpringBootRestAPIDemo/members/" + userid,
+    					type : "DELETE",
+    					dataType : "json",
+    					success : function(data){  //서버로 부터 받은 데이터
+    						alert(data.code);   //success
+    						location.href = "/SpringBootRestAPIDemo/";
+    					},
+    					error : function(err){
+    						alert("error = " + err);
+    					}
+    				});
+    			}else{
+    				history.go(0);
+    			}
+    		});
+    	});
+    </script>
+</head>
+<body>
+	<div><a href="/SpringBootRestAPIDemo/"><img src="images/spring-boot.png" /></a></div>
+	<div>
+	    <h1><span class="name"></span>(<span class="userid"></span>)님! 회원 정보</h1>
+	    <ul>
+	        <li>아이디 : <span class="userid"></span></li>
+	        <li>이름 : <span class="name"></span></li>
+	        <li>나이 : <span id="age"></span></li>
+	        <li>성별 : <span id="gender"></span></li>
+	        <li>거주지 : <span id="city"></span></li>
+	    </ul>
+    </div>
+    <div>
+    	<a href="javascript:void(0)" onclick="javascript:history.back()">목록으로</a>&nbsp;&nbsp;
+    	<a href="#">정보수정하기</a>&nbsp;&nbsp;
+    	<a href="#" id="btnDelete">탈퇴하기</a>
+    </div>
+</body>
+</html>
