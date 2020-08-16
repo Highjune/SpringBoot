@@ -2,7 +2,7 @@ Springboot Mybatis Demo - mybatis이용해서 springboot
 
 
 (20200423)
-https://youtu.be/gC2bKceP3U0 / SpringBootMyBatisDemo 프로젝트1  
+https://youtu.be/gC2bKceP3U0 / SpringBootMyBatisDemo 프로젝트1   
 https://youtu.be/1hNx7Sa6OpU /  SpringBootMyBatisDemo 프로젝트2
 https://youtu.be/y_wyrnOFeZg / SpringBootMyBatisDemo 프로젝트3(config, mapper 환경설정), cf) springboot교재 p48
 https://youtu.be/gkiDzhYq9pc / SpringBootMyBatisDemo 프로젝트4 
